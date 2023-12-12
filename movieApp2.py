@@ -33,13 +33,6 @@ fig2.update_traces(marker_color='#FF6F61')
 st.plotly_chart(fig2)
 st.markdown('This histogram displays the distribution of ratings for movies released in the selected year.')
 
-st.header('Gender Diversity in Top Films')
-top_film_each_year = df_movies.loc[df_movies.groupby('Year')['Rating'].idxmax()]
-fig3 = px.bar(top_film_each_year, x='Year', y=['Female_Ratio', 'Male_Ratio'], title='Gender Diversity in Top Films Each Year')
-fig3.update_layout(template='plotly_white', colorway=custom_palette)
-st.plotly_chart(fig3)
-st.markdown('This bar chart illustrates the gender diversity in cast and crew of the top-rated film of each year.')
-
 st.header('Director Insights')
 selected_director = st.selectbox('Select a Director', df_movies['Director'].unique())
 director_movies = df_movies[df_movies['Director'] == selected_director]

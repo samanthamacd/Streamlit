@@ -9,6 +9,14 @@ custom_palette = ['#4B8BBE', '#306998', '#FFE873', '#FFD43B', '#646464']
 
 st.title('Movie Data Insights')
 
+def extract_primary_genre(genres_str):
+    if pd.isna(genres_str) or genres_str == '':
+        return 'Unknown'
+    genres_list = genres_str.strip("[]").split(", ")  # Remove brackets and split by comma
+    return genres_list[0].strip("'\"")  # Remove any single or double quotes
+
+df_movies['Primary_Genre'] = df_movies['Genres'].apply(extract_primary_genre)
+
 st.header('Movie Revenue Over Time')
 selected_genre = st.selectbox('Select a Genre', df_movies['Primary_Genre'].unique())
 filtered_data_by_genre = df_movies[df_movies['Primary_Genre'] == selected_genre]
